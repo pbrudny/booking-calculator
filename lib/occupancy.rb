@@ -10,6 +10,17 @@ class Occupancy
 
   end
 
+  def days
+
+  end
+
+  def period_days
+    period.count
+  end
+
+  def percent
+
+  end
   private
 
   attr_accessor :bookings, :period
