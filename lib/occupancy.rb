@@ -1,4 +1,5 @@
 require 'date'
+require 'pry'
 
 class Occupancy
   def initialize(bookings, period)
@@ -6,12 +7,19 @@ class Occupancy
     @period = period
   end
 
-  def call
-
+  def days
+    occupied_days = 0
+    while !bookings.empty? && occupied_days < period_days do
+      booking = bookings.pop
+      occupied_days += overlap(booking)
+    end
+    occupied_days
   end
 
-  def days
-
+  def overlap(booking)
+    return 0 if Date.parse(booking[:end]) < period.first
+    return 0 if Date.parse(booking[:start]) > period.last
+    return period_days if Date.parse(booking[:start]) <= period.first && Date.parse(booking[:end]) >= period.last
   end
 
   def period_days
@@ -19,8 +27,9 @@ class Occupancy
   end
 
   def percent
-
+    Integer(days / Float(period_days) * 100)
   end
+
   private
 
   attr_accessor :bookings, :period

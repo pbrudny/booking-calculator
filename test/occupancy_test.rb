@@ -21,6 +21,36 @@ describe Occupancy do
     end
   end
 
+  describe 'when bookings before and after given period' do
+    before do
+      bookings = [{start: '2015-05-02', end: '2015-05-30'}, {start: '2015-06-23', end: '2015-06-30'}]
+      @occupancy = Occupancy.new(bookings, @period)
+    end
+
+    describe '#days' do
+      it { @occupancy.days.must_equal 0 }
+    end
+
+    describe '#percent' do
+      it { @occupancy.percent.must_equal 0 }
+    end
+  end
+
+  describe 'when booking overlaps whole period' do
+    before do
+      bookings = [{start: '2015-05-14', end: '2015-06-22'}]
+      @occupancy = Occupancy.new(bookings, @period)
+    end
+
+    describe '#days' do
+      it { @occupancy.days.must_equal 22 }
+    end
+
+    describe '#percent' do
+      it { @occupancy.percent.must_equal 100 }
+    end
+  end
+
   describe 'when one booking' do
     before do
       bookings = [{start: '2015-06-02', end: '2015-06-15'}]
