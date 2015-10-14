@@ -12,8 +12,8 @@ describe Occupancy do
       @occupancy = Occupancy.new(bookings, @period)
     end
 
-    describe '#days' do
-      it { @occupancy.days.must_equal 0 }
+    describe '#days_occupied' do
+      it { @occupancy.days_occupied.must_equal 0 }
     end
 
     describe '#percent' do
@@ -27,8 +27,8 @@ describe Occupancy do
       @occupancy = Occupancy.new(bookings, @period)
     end
 
-    describe '#days' do
-      it { @occupancy.days.must_equal 0 }
+    describe '#days_occupied' do
+      it { @occupancy.days_occupied.must_equal 0 }
     end
 
     describe '#percent' do
@@ -42,8 +42,8 @@ describe Occupancy do
       @occupancy = Occupancy.new(bookings, @period)
     end
 
-    describe '#days' do
-      it { @occupancy.days.must_equal 22 }
+    describe '#days_occupied' do
+      it { @occupancy.days_occupied.must_equal 22 }
     end
 
     describe '#percent' do
@@ -57,8 +57,8 @@ describe Occupancy do
       @occupancy = Occupancy.new(bookings, @period)
     end
 
-    describe '#days' do
-      it { @occupancy.days.must_equal 13 }
+    describe '#days_occupied' do
+      it { @occupancy.days_occupied.must_equal 13 }
     end
 
     describe '#percent' do
@@ -77,8 +77,8 @@ describe Occupancy do
       @occupancy = Occupancy.new(bookings, @period)
     end
 
-    describe '#days' do
-      it { @occupancy.days.must_equal 11 }
+    describe '#days_occupied' do
+      it { @occupancy.days_occupied.must_equal 11 }
     end
 
     describe '#percent' do
