@@ -11,15 +11,18 @@ class Occupancy
     occupied_days = 0
     while !bookings.empty? && occupied_days < period_days do
       booking = bookings.pop
-      occupied_days += overlap(booking)
+      occupied_days += overlap(Date.parse(booking[:start]), Date.parse(booking[:end]))
     end
     occupied_days
   end
 
-  def overlap(booking)
-    return 0 if Date.parse(booking[:end]) < period.first
-    return 0 if Date.parse(booking[:start]) > period.last
-    return period_days if Date.parse(booking[:start]) <= period.first && Date.parse(booking[:end]) >= period.last
+  def overlap(start_day, end_day)
+    return 0 if end_day < period.first
+    return 0 if start_day > period.last
+    return period_days if start_day <= period.first && end_day >= period.last
+    pointer_start = (start_day <= period.first ? period.first : start_day)
+    pointer_end = (end_day <= period.last ? end_day : period.last)
+    pointer_end - pointer_start
   end
 
   def period_days

@@ -66,18 +66,23 @@ describe Occupancy do
     end
   end
 
-  describe 'when multiple booking' do
+  describe 'when multiple bookings' do
     before do
-      bookings = [{start: '2015-06-01', end: '2015-06-15'}, {start: '2015-06-21', end: '2015-06-27'}]
+      bookings = [
+        {start: '2015-05-20', end: '2015-06-02'},
+        {start: '2015-06-04', end: '2015-06-05'},
+        {start: '2015-06-07', end: '2015-06-15'},
+        {start: '2015-06-21', end: '2015-06-27'},
+      ]
       @occupancy = Occupancy.new(bookings, @period)
     end
 
     describe '#days' do
-      it { @occupancy.days.must_equal 15 }
+      it { @occupancy.days.must_equal 11 }
     end
 
     describe '#percent' do
-      it { @occupancy.percent.must_equal 68 }
+      it { @occupancy.percent.must_equal 50 }
     end
   end
 end
