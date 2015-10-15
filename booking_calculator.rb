@@ -1,4 +1,4 @@
-require_relative 'lib/occupancy'
+require_relative 'lib/occupancy_report'
 
-report = OccupancyReport.new(ARGV[0], ARGV[1], ARGV[2])
-report.display_output
+report = BookingCalculator::OccupancyReport.new(ARGV[0], ARGV[1], ARGV[2])
+puts report.output

@@ -9,10 +9,10 @@ module BookingCalculator
       self.end_date = end_date
     end
 
-    def display_output
-      "Percent of occupancy: #{occupancy_percent}
-       Nights available: #{nights_available}
-       Nights occupied: #{nights_occupied}"
+    def output
+      "Percent of occupancy: #{occupancy_percent}\n"\
+      "Nights available: #{nights_available}\n"\
+      "Nights occupied: #{nights_occupied}"
     end
 
     def occupancy_percent
