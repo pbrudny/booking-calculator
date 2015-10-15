@@ -3,8 +3,8 @@ ruby '2.2.2'
 
 gem 'bundler'
 
-group :development, :test do
-  gem 'pry'
+group :development do
+  gem 'rubocop'
 end
 
 group :test do

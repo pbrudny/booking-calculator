@@ -1,5 +1,4 @@
-This is simple booking algorithm
-
+This is a simple application providing calculation for booking systems
 ### Setup
 
 ```

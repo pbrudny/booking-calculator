@@ -1,37 +1,42 @@
 require_relative 'overlap'
 
-class Occupancy
-  def initialize(bookings, period)
-    @bookings = bookings
-    @period = period
-  end
-
-  def days_occupied
-    occupied_days = 0
-    while !bookings.empty? && occupied_days < period_days do
-      booking = bookings.pop
-      occupied_days += overlap(booking)
+module BookingCalculator
+  class Occupancy
+    def initialize(bookings, period)
+      self.bookings = bookings
+      self.period = period
     end
-    occupied_days
-  end
 
-  def period_days
-    period.count
-  end
+    def days_occupied
+      @occupied_days ||= count_occupied
+    end
 
-  def days_available
-    period_days - days_occupied
-  end
+    def days_available
+      period_days - days_occupied
+    end
 
-  def percent
-    Integer(days_occupied / Float(period_days) * 100)
-  end
+    def percent
+      Integer(days_occupied / Float(period_days) * 100)
+    end
 
-  private
+    private
 
-  attr_accessor :bookings, :period
+    attr_accessor :bookings, :period
 
-  def overlap(booking)
-    Overlap.new(period, booking).call
+    def overlap(booking)
+      BookingCalculator::Overlap.new(period, booking).call
+    end
+
+    def period_days
+      period.count
+    end
+
+    def count_occupied
+      occupied_days = 0
+      while !bookings.empty? && occupied_days < period_days
+        occupied_days += overlap(bookings.pop)
+      end
+      occupied_days
+    end
   end
 end
